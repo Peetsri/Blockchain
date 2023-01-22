@@ -38,7 +38,7 @@ class Blockchain:
         new_nonce = 1 
         check_proof = False
         while check_proof is False:
-            hash_tmp = hashlib.sha256(str(new_nonce**2 - previous_nonce**2).encode()).hexdigest()
+            hash_tmp = hashlib.sha256(str((new_nonce**2 - previous_nonce**2)/2).encode()).hexdigest()
             if hash_tmp[:4] =='0000':
                 check_proof = True
             else:
@@ -55,7 +55,7 @@ class Blockchain:
                 return False
             previous_nonce = previous_block["nonce"]
             current_nonce = block["nonce"]
-            hash_tmp = hashlib.sha256(str(current_nonce**2 - previous_nonce**2).encode()).hexdigest() 
+            hash_tmp = hashlib.sha256(str((current_nonce**2 - previous_nonce**2)/2).encode()).hexdigest() 
             if hash_tmp[:4] != "0000" :
                 return False
             previous_block=block
